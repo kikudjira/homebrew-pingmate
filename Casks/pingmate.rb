@@ -1,6 +1,6 @@
 cask "pingmate" do
-  version "1.0.0"
-  sha256 "88611cc3d4689d1dba54a3c9a9852c5acfc98939c088eac6d8f541fb2aa9c8f7"
+  version "1.0.1"
+  sha256 "8fac5f2bbc506f2e4738e2ee75572be450deaad2ec37daba243247908b22e824"
 
   url "https://github.com/kikudjira/pingmate/releases/download/v#{version}/PingMate-#{version}.dmg"
   name "PingMate"
