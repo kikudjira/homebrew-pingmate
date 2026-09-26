@@ -1,6 +1,6 @@
 cask "pingmate" do
-  version "1.0.2"
-  sha256 "0c02a161edc774d9f8446913e0b58c4a225c563d36212d28cea8b99bad9284be"
+  version "1.1.0"
+  sha256 "9423faa10cc424eb9cb0c52e74ddf8d4a5b6f95ceffb91a5f13c2335fbe29738"
 
   url "https://github.com/kikudjira/pingmate/releases/download/v#{version}/PingMate-#{version}.dmg"
   name "PingMate"
@@ -15,9 +15,12 @@ cask "pingmate" do
 
   # The build is ad-hoc signed, not notarized, so Gatekeeper would refuse to
   # launch it straight out of a quarantined download.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/PingMate.app"]
+  postflight_steps do
+    # Arguments take no path templates, so xattr runs inside the bundle on ".".
+    run "/usr/bin/xattr",
+        args:           ["-dr", "com.apple.quarantine", "."],
+        chdir:          "{{appdir}}/PingMate.app",
+        writable_paths: ["{{appdir}}/PingMate.app"]
   end
 
   uninstall quit: "com.kikudjira.pingmate"
